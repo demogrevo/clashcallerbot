@@ -6,8 +6,8 @@
  - In this step, you'll create a new application, and add NodeJS and MySQL cartridges. See link about for more details.
  - You will also need  to create a GroupMe bot. Watch https://www.youtube.com/watch?v=8wh_TRPCEsQ on how to do it.
  
- As an example, lets say we created an application named "sandsnake", with the domain name "sss" in Openshift.
- Get the template code from your openshift application source code (you'll find this url in OpenShift application page):
+ - Get the template code from your Openshift application source code. You'll find the source code url in OpenShift application page.
+   As an example, lets say we created an application named ```"sandsnake"```, with the domain name ```"sss"``` in Openshift: 
  
 ```
 c:\> mkdir bots
@@ -17,7 +17,7 @@ c:\bots> git clone ssh://57718af289f5cf88c1000096@sandsnake-sss.rhcloud.com/~/gi
 
 Note: this will create "c:\bots\sandsnake" folder.
 
-Get the bot source code from github:
+Get the bot source code from Github:
 
 ```
 c:\> cd bots
