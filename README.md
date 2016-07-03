@@ -26,20 +26,19 @@ c:\bots> git clone https://github.com/poweribo/clashcallerbot.git
 
 Note: this will create "c:\bots\clashcallerbot" folder
 
- - copy all files from ```c:\bots\clashcallerbot``` into ```c:\bots\sandsnake folder``` (select all and copy paste), overwrite any file with the same name.
- - delete server.js as you wont need it
-
-  Add yourself as the first bot Admin (Only admin can start wars, set timer, add other admins etc) 
+ - Copy all files from ```c:\bots\clashcallerbot``` into ```c:\bots\sandsnake folder``` (select all and copy paste), overwrite any file with the same name.
+ - Delete server.js as you wont need it
+ - Add yourself as the first bot Admin (Only admin can start wars, set timer, add other admins etc) 
   so find a way to get your GroupMe id and edit ```admin.txt``` to type in your GroupMe id. 
   i.e. Find a group with a working caller bot and type ```/me```.
 
-  Any number of admins can be added. The format is (separated by comma):
+  Any number of admins can be added. IDs should be separated by comma. Format should look like below example :
   
 ```
   ID_OF_ADMIN_1,ID_OF_ADMIN_2,ID_OF_ADMIN_3
 ```  
 
-Set environment variables for your openshift bot (this is just an example, provide your own application's name in place of "sandsnake".
+- Set environment variables for your openshift bot (this is just an example, provide your own application's name in place of "sandsnake".
 Find your bot id from https://dev.groupme.com/bots and provide your own clan name.
 
 ```
@@ -49,7 +48,7 @@ c:\bots> rhc set-env CLAN_NAME='Reddit Viper' -a sandsnake
 c:\bots> rhc set-env CALL_TIMER=3 -a sandsnake
 ```
 
-To verify you have correctly set all the environment variables, do:
+- To verify you have correctly set all the environment variables, do:
 
 ```
 c:\bots> rhc env list -a sandsnake
@@ -66,8 +65,8 @@ c:\bots\sandsnake> git push
 ```
 c:\bots> rhc tail -a sandsnake   
 ```   
- - Only thing is to set up the database. Your application will look like http://sandsnake-sss.rhcloud.com/
-   so to initialize your database (to be done only once!), do that by going to: ```http://sandsnake-sss.rhcloud.com/setup```
+ - Set up the database! Your application will look like http://sandsnake-sss.rhcloud.com/
+   so to set up your database (to be done only once!), do that by going to: ```http://sandsnake-sss.rhcloud.com/setup``` using your browser
  - After setting it up, type ```/help``` in your GroupMe group to see the commands or ```/help -a``` to see commands including admin commands
 
 ### Creating admins ###
