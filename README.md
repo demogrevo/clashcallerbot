@@ -26,12 +26,12 @@ c:\bots> git clone https://github.com/poweribo/clashcallerbot.git
 
 Note: this will create "c:\bots\clashcallerbot" folder
 
- - copy all files from c:\bots\clashcallerbot into c:\bots\sandsnake folder (select all and copy paste), overwrite any file with the same name.
+ - copy all files from ```c:\bots\clashcallerbot``` into ```c:\bots\sandsnake folder``` (select all and copy paste), overwrite any file with the same name.
  - delete server.js as you wont need it
 
-  Add yourself as the first bot Admin (Only admin can start wars, set timer, add other admins etc)
-  Find a way to get your GroupMe id and edit ```admin.txt``` to type in your GroupMe id. 
-  i.e Find a group with a working caller bot and type ```/me```.
+  Add yourself as the first bot Admin (Only admin can start wars, set timer, add other admins etc) 
+  so find a way to get your GroupMe id and edit ```admin.txt``` to type in your GroupMe id. 
+  i.e. Find a group with a working caller bot and type ```/me```.
 
   Any number of admins can be added. The format is (separated by comma):
   
@@ -63,7 +63,9 @@ c:\bots\sandsnake> git push
 ```
 
  - Thats it, your bot will be up shortly. To monitor the logs, do the ff below:
-   c:\bots\sandsnake> rhc tail -a sandsnake   
+```
+c:\bots> rhc tail -a sandsnake   
+```   
  - Only thing is to set up the database. Your application will look like http://sandsnake-sss.rhcloud.com/
    so to initialize your database (to be done only once!), do that by going to: ```http://sandsnake-sss.rhcloud.com/setup```
  - After setting it up, type ```/help``` in your GroupMe group to see the commands or ```/help -a``` to see commands including admin commands
