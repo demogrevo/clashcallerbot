@@ -1,98 +1,71 @@
 # GroupMe Bot that uses Clashcaller (Clash of Clans target caller)
 
 ### Prerequisites:
- - Install Ruby, Git, RHC and create an application by following the instructions here: https://developers.openshift.com/getting-started/windows.html 
+ - This application was customized to run in Openshift (openshift.com) so you'll need an openshift account.
+ - Install Ruby, Git, RHC and create an application by following the instructions here: https://developers.openshift.com/getting-started/windows.html  
+ - In this step, you'll create a new application, and add NodeJS and MySQL cartridges. See link about for more details.
+ - You will also need  to create a GroupMe bot. Watch https://www.youtube.com/watch?v=8wh_TRPCEsQ on how to do it.
  
+ As an example, lets say we created an application named "sandsnake", with the domain name "sss" in Openshift:
 ```
-$ git clone https://github.com/poweribo/clashcallerbot.git 
-```
- - Go into directory:
-```
-$ cd clashcallerbot
-```
- - Login into heroku:
-```
-$ heroku login
-```
- - Create the app:
-```
-$ heroku create
-```
- - This will return a link to your heroku app. Copy that. The link will be like:
-```
-https://XXXXXX-XXXXX-XXXXX.herokuapp.com/
-```
-  - Creating a database:
-```
-$ heroku addons:create cleardb:ignite
-```
+Get the template code from your openshift application source code (you'll find this url in OpenShift application page):
 
- - Go to [GroupMe Developer Website](https://dev.groupme.com/) and log in using your GroupMe details.
- - Go to [GroupMe Bots page](https://dev.groupme.com/bots) and click on 'Create Bot'.
- - Set the group the bot will reside in, its name, and in the *Callback URL* field, put the heroku app link you got from above step (https://XXXXXX-XXXXX-XXXXX.herokuapp.com/)
- - Submit, you will be redirected to the bots index page. Copy the *Bot ID* of your Bot from here.
- - Go to your project folder (**caller-bot**) and edit the following files:
- - ``` .env``` file. Put your bot ID there like:
-```
-BOT_ID="YOUR_BOT_ID_HERE"
-```
+c:\> mkdir bots
+c:\> cd bots
+c:\bots> git clone ssh://57718af289f5cf88c1000096@sandsnake-sss.rhcloud.com/~/git/sandsnake.git/
 
- - Call timer values for settings:
+Note: this will create "c:\bots\sandsnake" folder
 ```
-0: none
--2: (1/2) flex timer
--4: (1/4) flex timer
-1: 1 hour
-2: 2 hours
-3: 3 hours
-4: 4 hours
-5: 5 hours
-6: 6 hours
-7: 7 hours
-8: 8 hours
-9: 9 hours
-10: 10 hours
-12: 12 hours
-24: 24 hours
-```
+Get the bot source code from github:
 
- - ```clash_caller.js``` file for clan name (line 17) and call timer (line 18) settings:
-```javascript
-var my_clan_name = "Your clan name here"; // Line 17
-var war_call_timer = 6; // Line 18, in hours
-```
- - In terminal, in your directory where you made the app, create a config variable on heroku using:
-```
-heroku config:set BOT_ID='YOUR_BOT_ID_HERE'
-```
- - After setting up the variable, upload the files using:
-```
-git add .
-git commit -am "first push"
-git push heroku master
-```
- - Thats it, you're bot is up. Only thing is to set up the database. Do that by going to: ```https://XXXXXX-XXXXX-XXXXX.herokuapp.com/setup```
- - After setting it up, type ```/help``` in your group to see the commands. You need to add admins before you put change default caller code. If you have an exisiting clash caller going on type ```/set cc (code)``` to save it. To create new clash caller type ```/start war (war size) (enemy name)```
- - Go to the following routes to do the actions:
-```
-/setup - to set up database
-/cc - to view current caller
-/log - to view log
-```
+c:\> cd bots
+c:\bots> git clone https://github.com/poweribo/clashcallerbot.git 
 
-- - -
+Note: this will create "c:\bots\clashcallerbot" folder
+```
+ - copy all files from c:\bots\clashcallerbot into c:\bots\sandsnake folder (select all and copy paste), overwrite any file with the same name.
+ - delete server.js as you wont need it
+```
+  Add yourself as the first bot Admin (Only admin can start wars, set timer, add other admins etc)
+  Find a way to get your GroupMe id and edit ```admin.txt``` to type in your GroupMe id. 
+  i.e Find a group with a working caller bot and type ```/me```.
+
+  Any number of admins can be added. The format is (separated by comma):
+```
+  ID_OF_ADMIN_1,ID_OF_ADMIN_2,ID_OF_ADMIN_3
+```  
+
+Set environment variables for your openshift bot (this is just an example, provide your own application's name in place of "sandsnake".
+Find your bot id from https://dev.groupme.com/bots and provide your own clan name.
+
+c:\bots> rhc set-env OPENSHIFT_MYSQL_DB_NAME=sandsnake -a sandsnake
+c:\bots> rhc set-env BOT_ID=abcdefghabcdefgh -a sandsnake
+c:\bots> rhc set-env CLAN_NAME='Reddit Viper' -a sandsnake
+c:\bots> rhc set-env CALL_TIMER=3 -a sandsnake
+
+To verify you have correctly set all the environment variables, do:
+
+c:\bots> rhc env list -a sandsnake
+
+```
+ - After setting up the env variables, upload the files to openshift by doing:
+```
+c:\bots\sandsnake> git add .
+c:\bots\sandsnake> git commit -m "initial commit"
+c:\bots\sandsnake> git push
+```
+ - Thats it, your bot will be up shortly. To monitor the logs, do the ff below:
+   c:\bots\sandsnake> rhc tail -a sandsnake   
+ - Only thing is to set up the database. Your application will look like http://sandsnake-sss.rhcloud.com/
+   so to initialize your database (to be done only once!), do that by going to: ```http://sandsnake-sss.rhcloud.com/setup```
+ - After setting it up, type ```/help``` in your GroupMe group to see the commands or ```/help -a``` to see commands including admin commands
+
+```
 
 ### Creating admins ###
  - Assuming that you've set up the bot, and its working fine, its time to set admins.
- - Type ```/me``` in group to reveal your GroupMe ID.
- - Copy that ID and paste it in ```admins.txt``` file in csv format. Any amount of admins can be added. The format is:
-```
-ID_OF_ADMIN_1,ID_OF_ADMIN_2,ID_OF_ADMIN_3
-```
-
- - Now that its done, push these changes using:
-```
-git add .
-git commit -am "setting admins"
-git push heroku master
-```
+ - If you have followed instructions above, you are the first admin. There is need to edit admin.txt to add more admins, 
+   you can do it in GroupMe (if you are admin)
+ - Let other admin-to-be members to type ```/me``` in group to reveal their GroupMe ID (for example 12345559).
+ - Copy that ID and type in GroupMe group: ```/add admin 12345559````. 
+ 
