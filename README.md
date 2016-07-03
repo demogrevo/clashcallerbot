@@ -1,4 +1,4 @@
-# GroupMe Bot that uses Clashcaller (Clash of Clans target caller)
+# GroupMe Bot that uses Clashcaller
 
 ### Prerequisites:
  - This application was customized to run in Openshift (openshift.com) so you'll need an openshift account.
