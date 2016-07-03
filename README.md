@@ -17,7 +17,7 @@ c:\bots> git clone ssh://57718af289f5cf88c1000096@sandsnake-sss.rhcloud.com/~/gi
 
 Note: this will create "c:\bots\sandsnake" folder.
 
-Get the bot source code from Github:
+- Get the bot source code from Github:
 
 ```
 c:\> cd bots
